@@ -20,6 +20,8 @@ const TextExample = () => {
       <Paragraph style={styles.text}>Paragraph</Paragraph>
       <Subheading style={styles.text}>Subheading</Subheading>
       <Title style={styles.text}>Title</Title>
+      <Title style={[{ fontWeight: 'bold' }, styles.text]}>Title</Title>
+      <Title style={[{ fontStyle: 'italic' }, styles.text]}>Title</Title>
       <Headline style={styles.text}>Headline</Headline>
     </View>
   );

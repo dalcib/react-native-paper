@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { I18nManager, Platform, StatusBar } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
-import { Updates } from 'expo';
+//import { Updates } from 'expo';
 import { useKeepAwake } from 'expo-keep-awake';
 import { InitialState, NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
@@ -13,6 +13,9 @@ import {
 import App from './RootNavigator';
 import DrawerItems from './DrawerItems';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import useRoboto from './Roboto';
+
+window.__vectorIcons = {};
 
 // Add new typescript properties to the theme
 declare global {
@@ -90,6 +93,7 @@ const Drawer = createDrawerNavigator<{ Home: undefined }>();
 
 export default function PaperExample() {
   useKeepAwake();
+  useRoboto();
 
   const [isReady, setIsReady] = React.useState(false);
   const [initialState, setInitialState] = React.useState<
@@ -160,7 +164,7 @@ export default function PaperExample() {
 
       if (I18nManager.isRTL !== rtl) {
         I18nManager.forceRTL(rtl);
-        Updates.reloadFromCache();
+        //Updates.reloadFromCache();
       }
     };
 
@@ -195,13 +199,14 @@ export default function PaperExample() {
                 AsyncStorage.setItem(PERSISTENCE_KEY, JSON.stringify(state))
               }
             >
-              {Platform.OS === 'web' ? (
+              {
+                /* Platform.OS === 'web' ? (
                 <App />
-              ) : (
+              ) : ( */
                 <Drawer.Navigator drawerContent={() => <DrawerContent />}>
                   <Drawer.Screen name="Home" component={App} />
                 </Drawer.Navigator>
-              )}
+              }
               <StatusBar barStyle="light-content" />
             </NavigationContainer>
           </React.Fragment>
